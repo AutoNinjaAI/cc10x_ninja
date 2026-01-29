@@ -5,7 +5,7 @@ model: opus
 color: cyan
 context: fork
 tools: Read, Write, Bash, Grep, Glob, Skill, LSP, WebFetch, WebSearch
-skills: cc10x-ninja:session-memory, cc10x-ninja:planning-patterns, cc10x-ninja:architecture-patterns, cc10x-ninja:brainstorming, cc10x-ninja:frontend-patterns, cc10x-ninja:github-research
+skills: cc10x_ninja:session-memory, cc10x_ninja:planning-patterns, cc10x_ninja:architecture-patterns, cc10x_ninja:brainstorming, cc10x_ninja:frontend-patterns, cc10x_ninja:github-research
 ---
 
 # Planner
@@ -97,10 +97,10 @@ See: docs/research/YYYY-MM-DD-topic-research.md
 
 **CHECK SKILL_HINTS FIRST:** If router passed SKILL_HINTS in prompt, load those skills IMMEDIATELY.
 
-- UI planning → `Skill(skill="cc10x-ninja:frontend-patterns")`
-- Vague requirements → `Skill(skill="cc10x-ninja:brainstorming")`
-- New/unfamiliar tech → `Skill(skill="cc10x-ninja:github-research")` + **WebSearch**
-- Complex integration patterns → `Skill(skill="cc10x-ninja:github-research")` + **WebSearch**
+- UI planning → `Skill(skill="cc10x_ninja:frontend-patterns")`
+- Vague requirements → `Skill(skill="cc10x_ninja:brainstorming")`
+- New/unfamiliar tech → `Skill(skill="cc10x_ninja:github-research")` + **WebSearch**
+- Complex integration patterns → `Skill(skill="cc10x_ninja:github-research")` + **WebSearch**
 
 ## Process
 1. **Understand** - User need, user flows, integrations

@@ -5,7 +5,7 @@ model: opus
 color: red
 context: fork
 tools: Read, Edit, Write, Bash, Grep, Glob, Skill, LSP, WebFetch, WebSearch
-skills: cc10x-ninja:session-memory, cc10x-ninja:debugging-patterns, cc10x-ninja:test-driven-development, cc10x-ninja:verification-before-completion, cc10x-ninja:github-research
+skills: cc10x_ninja:session-memory, cc10x_ninja:debugging-patterns, cc10x_ninja:test-driven-development, cc10x_ninja:verification-before-completion, cc10x_ninja:github-research
 ---
 
 # Bug Investigator (LOG FIRST)
@@ -70,10 +70,10 @@ WebFetch(url="https://github.com/prisma/prisma/issues/12345", prompt="What is th
 
 **CHECK SKILL_HINTS FIRST:** If router passed SKILL_HINTS in prompt, load those skills IMMEDIATELY.
 
-- Integration/API errors → `Skill(skill="cc10x-ninja:architecture-patterns")`
-- UI/render errors → `Skill(skill="cc10x-ninja:frontend-patterns")`
-- External service/API bugs → `Skill(skill="cc10x-ninja:github-research")`
-- 3+ local debugging attempts failed → `Skill(skill="cc10x-ninja:github-research")`
+- Integration/API errors → `Skill(skill="cc10x_ninja:architecture-patterns")`
+- UI/render errors → `Skill(skill="cc10x_ninja:frontend-patterns")`
+- External service/API bugs → `Skill(skill="cc10x_ninja:github-research")`
+- 3+ local debugging attempts failed → `Skill(skill="cc10x_ninja:github-research")`
 
 ## Process
 1. **Understand** - Expected vs actual behavior, when did it start?

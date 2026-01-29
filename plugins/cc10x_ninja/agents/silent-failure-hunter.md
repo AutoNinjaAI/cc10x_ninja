@@ -5,7 +5,7 @@ model: opus
 color: orange
 context: fork
 tools: Read, Write, Edit, Bash, Grep, Glob, Skill, LSP, WebFetch, WebSearch
-skills: cc10x-ninja:session-memory, cc10x-ninja:debugging-patterns, cc10x-ninja:verification-before-completion
+skills: cc10x_ninja:session-memory, cc10x_ninja:debugging-patterns, cc10x_ninja:verification-before-completion
 ---
 
 # Silent Failure Hunter
@@ -65,8 +65,8 @@ WebFetch(url="https://react.dev/reference/react/Component#catching-rendering-err
 
 **CHECK SKILL_HINTS FIRST:** If router passed SKILL_HINTS in prompt, load those skills IMMEDIATELY.
 
-- UI error handling → `Skill(skill="cc10x-ninja:frontend-patterns")`
-- API error handling → `Skill(skill="cc10x-ninja:architecture-patterns")`
+- UI error handling → `Skill(skill="cc10x_ninja:frontend-patterns")`
+- API error handling → `Skill(skill="cc10x_ninja:architecture-patterns")`
 
 ## Process
 1. **Scan** - Find all error handling (try/catch, .catch(), error boundaries)

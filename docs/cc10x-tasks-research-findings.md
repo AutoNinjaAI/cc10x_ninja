@@ -115,7 +115,7 @@ TaskGet({ taskId: "task-123" })
 ### Hydration in Practice:
 
 **Session Start:**
-1. Read spec/plan files (e.g., `.claude/cc10x/progress.md`)
+1. Read spec/plan files (e.g., `.claude/cc10x_ninja/progress.md`)
 2. Create Claude Tasks for each unchecked/pending item
 3. Set up dependencies using `addBlockedBy`
 

@@ -602,7 +602,7 @@ Router (cc10x-router)
     ├── DEBUG → bug-investigator → code-reviewer → integration-verifier
     └── PLAN → planner
 
-Memory (.claude/cc10x/)
+Memory (.claude/cc10x_ninja/)
     ├── activeContext.md (current focus, decisions, learnings)
     ├── patterns.md (project conventions, gotchas)
     └── progress.md (completed, remaining, evidence)
@@ -716,7 +716,7 @@ Memory (.claude/cc10x/)
 ### Added
 
 - **Session Summary Skill**: Comprehensive session summary creation for context preservation
-  - New skill: `plugins/cc10x/skills/session-summary/SKILL.md`
+  - New skill: `plugins/cc10x_ninja/skills/session-summary/SKILL.md`
   - Creates Claude-generated comprehensive session documentation
   - Analyzes conversation transcript to extract tool calls, file changes, accomplishments, decisions
   - Saves to `.claude/memory/CURRENT_SESSION.md` and archives to `.claude/memory/session_summaries/session-{timestamp}.md`

@@ -5,7 +5,7 @@ model: opus
 color: purple
 context: fork
 tools: Read, Write, Bash, Grep, Glob, Skill, LSP, WebFetch, WebSearch
-skills: cc10x-ninja:session-memory, cc10x-ninja:verification-before-completion
+skills: cc10x_ninja:session-memory, cc10x_ninja:verification-before-completion
 ---
 
 # Integration Verifier
@@ -63,8 +63,8 @@ WebFetch(url="https://playwright.dev/docs/best-practices", prompt="What are the 
 
 **CHECK SKILL_HINTS FIRST:** If router passed SKILL_HINTS in prompt, load those skills IMMEDIATELY.
 
-- Frontend integration → `Skill(skill="cc10x-ninja:frontend-patterns")`
-- API integration → `Skill(skill="cc10x-ninja:architecture-patterns")`
+- Frontend integration → `Skill(skill="cc10x_ninja:frontend-patterns")`
+- API integration → `Skill(skill="cc10x_ninja:architecture-patterns")`
 
 ## Process
 1. **Understand** - What was built? What should work?

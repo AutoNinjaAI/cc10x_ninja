@@ -140,15 +140,15 @@ docs/competitor-analysis.md
 *AUDIT*.md
 *test*.md
 *audit*.md
-!plugins/cc10x/skills/cc10x-orchestrator/workflows/*.md
+!plugins/cc10x_ninja/skills/cc10x-orchestrator/workflows/*.md
 
 # Internal scripts (should not be in repo)
 push-to-github.sh
 push_v3.1.py
 *.sh
 *.py
-!plugins/cc10x/hooks/*.sh
-!plugins/cc10x/scripts/*.sh
+!plugins/cc10x_ninja/hooks/*.sh
+!plugins/cc10x_ninja/scripts/*.sh
 
 # ========================================
 # BACKUP & ARCHIVE FILES
@@ -175,18 +175,18 @@ cc10x_V2-main/
 !README.md
 !LICENSE
 !CHANGELOG.md
-!plugins/cc10x/README.md
-!plugins/cc10x/QUICKSTART.md
-!plugins/cc10x/CLAUDE.md
+!plugins/cc10x_ninja/README.md
+!plugins/cc10x_ninja/QUICKSTART.md
+!plugins/cc10x_ninja/CLAUDE.md
 
 # Production code (DO NOT IGNORE)
 !plugins/
-!plugins/cc10x/
-!plugins/cc10x/skills/
-!plugins/cc10x/subagents/
-!plugins/cc10x/agents/
-!plugins/cc10x/hooks/
-!plugins/cc10x/scripts/
+!plugins/cc10x_ninja/
+!plugins/cc10x_ninja/skills/
+!plugins/cc10x_ninja/subagents/
+!plugins/cc10x_ninja/agents/
+!plugins/cc10x_ninja/hooks/
+!plugins/cc10x_ninja/scripts/
 
 # Production documentation (DO NOT IGNORE)
 !docs/

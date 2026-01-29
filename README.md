@@ -1,4 +1,4 @@
-# cc10x
+# cc10x_ninja
 
 ### The Intelligent Orchestrator for Claude Code
 
@@ -23,7 +23,7 @@ Most Claude Code plugins are **bloated and over-engineered**:
 ❌ You end up using nothing because it's overwhelming
 ```
 
-**cc10x is different.** One intelligent router detects your intent and automatically orchestrates the right agents with the right skills. You just work.
+**cc10x_ninja is different.** One intelligent router detects your intent and automatically orchestrates the right agents with the right skills. You just work.
 
 ---
 
@@ -52,23 +52,23 @@ Most Claude Code plugins are **bloated and over-engineered**:
 └──────────────────────────────────────────────────────────────────────────────┘
 ```
 
-**You say what you want. cc10x figures out the rest.**
+**You say what you want. cc10x_ninja figures out the rest.**
 
 ---
 
 ## Installation
 
 ```bash
-# Add marketplace
-/plugin marketplace add romiluz13/cc10x
+# Add marketplace (forked from romiluz13/cc10x)
+/plugin marketplace add cc10x_ninja
 
 # Install plugin
-/plugin install cc10x@romiluz13
+/plugin install cc10x_ninja
 
 # Restart Claude Code
 ```
 
-**That's it.** cc10x activates automatically on development keywords.
+**That's it.** cc10x_ninja activates automatically on development keywords.
 
 ---
 
@@ -83,13 +83,13 @@ Most Claude Code plugins are **bloated and over-engineered**:
 
 ---
 
-## What Makes cc10x Different
+## What Makes cc10x_ninja Different
 
 <table>
 <tr>
 <td width="50%">
 
-### Without cc10x
+### Without cc10x_ninja
 
 ```
 ❌ Claude guesses at bugs
@@ -103,7 +103,7 @@ Most Claude Code plugins are **bloated and over-engineered**:
 </td>
 <td width="50%">
 
-### With cc10x
+### With cc10x_ninja
 
 ```
 ✓ LOG FIRST - evidence before fixes
@@ -177,7 +177,7 @@ USER REQUEST
      │
      └── PLAN ───► planner
 
-MEMORY (.claude/cc10x/)
+MEMORY (.claude/cc10x_ninja/)
 ├── activeContext.md  ◄── Current focus, decisions, learnings
 ├── patterns.md       ◄── Project conventions, common gotchas
 └── progress.md       ◄── Completed work, remaining tasks
@@ -221,10 +221,10 @@ Skills are **loaded automatically by agents**. You never invoke them directly.
 
 ## Memory Persistence
 
-cc10x survives context compaction. This is critical for long sessions.
+cc10x_ninja survives context compaction. This is critical for long sessions.
 
 ```
-.claude/cc10x/
+.claude/cc10x_ninja/
 ├── activeContext.md   # What you're working on NOW
 │   - Current task
 │   - Active decisions (and WHY)
@@ -247,7 +247,7 @@ cc10x survives context compaction. This is critical for long sessions.
 
 ## Task-Based Orchestration
 
-cc10x uses Claude Code's Tasks system for workflow coordination:
+cc10x_ninja uses Claude Code's Tasks system for workflow coordination:
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -287,7 +287,7 @@ Day 2: "build it"
 
 ### When You Say "Build a Task Tracker"
 
-**cc10x Response:**
+**cc10x_ninja Response:**
 ```
 Detected BUILD intent. Executing BUILD workflow.
 
@@ -303,7 +303,7 @@ Clarifying requirements (REQUIRED):
 Waiting for your answers before proceeding.
 ```
 
-**Without cc10x:**
+**Without cc10x_ninja:**
 ```
 I'll help you build a task tracker! Let me start...
 [Writes code without asking]
@@ -368,7 +368,7 @@ I'll help you build a task tracker! Let me start...
 ## Files Structure
 
 ```
-plugins/cc10x/
+plugins/cc10x_ninja/
 ├── agents/
 │   ├── component-builder.md
 │   ├── bug-investigator.md
@@ -409,6 +409,6 @@ MIT License
 ---
 
 <p align="center">
-  <strong>cc10x v5.25.1</strong><br>
+  <strong>cc10x_ninja v6.0.0</strong><br>
   <em>The Intelligent Orchestrator for Claude Code</em>
 </p>

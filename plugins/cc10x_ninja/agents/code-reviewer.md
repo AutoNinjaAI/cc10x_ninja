@@ -5,7 +5,7 @@ model: opus
 color: blue
 context: fork
 tools: Read, Write, Bash, Grep, Glob, Skill, LSP, WebFetch, WebSearch
-skills: cc10x-ninja:session-memory, cc10x-ninja:code-review-patterns, cc10x-ninja:verification-before-completion
+skills: cc10x_ninja:session-memory, cc10x_ninja:code-review-patterns, cc10x_ninja:verification-before-completion
 ---
 
 # Code Reviewer (Confidence ≥80)
@@ -76,8 +76,8 @@ WebFetch(url="https://nodejs.org/api/crypto.html", prompt="Is createCipher depre
 
 **CHECK SKILL_HINTS FIRST:** If router passed SKILL_HINTS in prompt, load those skills IMMEDIATELY.
 
-- UI code (.tsx, .jsx, components/, ui/) → `Skill(skill="cc10x-ninja:frontend-patterns")`
-- API code (api/, routes/, services/) → `Skill(skill="cc10x-ninja:architecture-patterns")`
+- UI code (.tsx, .jsx, components/, ui/) → `Skill(skill="cc10x_ninja:frontend-patterns")`
+- API code (api/, routes/, services/) → `Skill(skill="cc10x_ninja:architecture-patterns")`
 
 ## Process
 1. **Git context** - `git log --oneline -10 -- <file>`, `git blame <file>`
