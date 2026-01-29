@@ -30,8 +30,8 @@ EVERY WORKFLOW MUST:
 
 | Operation | Tool | Permission |
 |-----------|------|------------|
-| Create memory directory | `Bash(command="mkdir -p .claude/cc10x")` | FREE |
-| **Read memory files** | `Read(file_path=".claude/cc10x/activeContext.md")` | **FREE** |
+| Create memory directory | `Bash(command="mkdir -p .claude/cc10x_ninja")` | FREE |
+| **Read memory files** | `Read(file_path=".claude/cc10x_ninja/activeContext.md")` | **FREE** |
 | **Create NEW memory file** | `Write(file_path="...", content="...")` | **FREE** (file doesn't exist) |
 | **Update EXISTING memory** | `Edit(file_path="...", old_string="...", new_string="...")` | **FREE** |
 | Save plan/design files | `Write(file_path="docs/plans/...", content="...")` | FREE |
@@ -53,11 +53,11 @@ EVERY WORKFLOW MUST:
 
 ```
 # WRONG (asks permission - compound Bash command)
-mkdir -p .claude/cc10x && cat .claude/cc10x/activeContext.md
+mkdir -p .claude/cc10x_ninja && cat .claude/cc10x_ninja/activeContext.md
 
 # RIGHT (permission-free - separate tools)
-Bash(command="mkdir -p .claude/cc10x")
-Read(file_path=".claude/cc10x/activeContext.md")
+Bash(command="mkdir -p .claude/cc10x_ninja")
+Read(file_path=".claude/cc10x_ninja/activeContext.md")
 ```
 
 **NEVER use heredoc writes** (`cat > file << 'EOF'`) - they ASK PERMISSION.
@@ -65,15 +65,15 @@ Read(file_path=".claude/cc10x/activeContext.md")
 
 ```
 # WRONG (asks permission - heredoc)
-cat > .claude/cc10x/activeContext.md << 'EOF'
+cat > .claude/cc10x_ninja/activeContext.md << 'EOF'
 content here
 EOF
 
 # RIGHT for NEW files (permission-free)
-Write(file_path=".claude/cc10x/activeContext.md", content="content here")
+Write(file_path=".claude/cc10x_ninja/activeContext.md", content="content here")
 
 # RIGHT for EXISTING files (permission-free)
-Edit(file_path=".claude/cc10x/activeContext.md",
+Edit(file_path=".claude/cc10x_ninja/activeContext.md",
      old_string="# Active Context",
      new_string="# Active Context\n\n[new content]")
 ```
@@ -95,7 +95,7 @@ Without memory persistence:
 
 ```
 .claude/
-└── cc10x/
+└── cc10x_ninja/
     ├── activeContext.md   # Current focus + learnings + decisions (MOST IMPORTANT)
     ├── patterns.md        # Project patterns, conventions, gotchas
     └── progress.md        # What works, what's left, verification evidence
@@ -137,7 +137,7 @@ For large memory files (200+ lines), agents MAY load selectively:
 
 ```
 # Step 1: Load first 50 lines (Quick Index + Current Focus)
-Read(file_path=".claude/cc10x/activeContext.md", limit=50)
+Read(file_path=".claude/cc10x_ninja/activeContext.md", limit=50)
 
 # Step 2: Decide which sections are relevant to current task
 # - Building new feature → Load "Active Decisions", "Patterns"
@@ -145,7 +145,7 @@ Read(file_path=".claude/cc10x/activeContext.md", limit=50)
 # - Continuing work → Load "Current Focus", "Next Steps"
 
 # Step 3: Load specific sections using offset/limit
-Read(file_path=".claude/cc10x/activeContext.md", offset=100, limit=50)
+Read(file_path=".claude/cc10x_ninja/activeContext.md", offset=100, limit=50)
 ```
 
 **Selective Loading Decision Matrix:**
@@ -182,7 +182,7 @@ Keep memory files trim for token efficiency:
 **Pruning is a READ operation first:**
 ```
 # Step 1: Read and assess size
-Read(file_path=".claude/cc10x/activeContext.md")
+Read(file_path=".claude/cc10x_ninja/activeContext.md")
 
 # Step 2: If > 200 lines, identify prunable content
 # Step 3: Move reusable content to appropriate file
@@ -226,7 +226,7 @@ Don't wait for workflow end. It's better to have duplicate entries than lost con
 During long sessions, periodically checkpoint:
 ```
 # After significant progress, even mid-task:
-Edit(file_path=".claude/cc10x/activeContext.md",
+Edit(file_path=".claude/cc10x_ninja/activeContext.md",
      old_string="## Current Focus",
      new_string="## Current Focus
 
@@ -498,12 +498,12 @@ Prior research on topic      → activeContext.md (Research References) → docs
 
 ```
 # Step 1: Create directory (single Bash command - permission-free)
-Bash(command="mkdir -p .claude/cc10x")
+Bash(command="mkdir -p .claude/cc10x_ninja")
 
 # Step 2: Load ALL 3 memory files using Read tool (permission-free)
-Read(file_path=".claude/cc10x/activeContext.md")
-Read(file_path=".claude/cc10x/patterns.md")
-Read(file_path=".claude/cc10x/progress.md")
+Read(file_path=".claude/cc10x_ninja/activeContext.md")
+Read(file_path=".claude/cc10x_ninja/patterns.md")
+Read(file_path=".claude/cc10x_ninja/progress.md")
 
 # Step 3: Git Context - Understand project state (RECOMMENDED)
 Bash(command="git status")                 # Current working state
@@ -514,7 +514,7 @@ Bash(command="git log --oneline -10")      # Recent commits
 **NEVER use this (asks permission):**
 ```bash
 # WRONG - compound command asks permission
-mkdir -p .claude/cc10x && cat .claude/cc10x/activeContext.md
+mkdir -p .claude/cc10x_ninja && cat .claude/cc10x_ninja/activeContext.md
 ```
 
 **If file doesn't exist:** Read tool returns an error - that's fine, means starting fresh.
@@ -525,10 +525,10 @@ mkdir -p .claude/cc10x && cat .claude/cc10x/activeContext.md
 
 ```
 # First, read the existing content
-Read(file_path=".claude/cc10x/activeContext.md")
+Read(file_path=".claude/cc10x_ninja/activeContext.md")
 
 # Then use Edit to replace (matches first line, replaces entire content)
-Edit(file_path=".claude/cc10x/activeContext.md",
+Edit(file_path=".claude/cc10x_ninja/activeContext.md",
      old_string="# Active Context",
      new_string="# Active Context
 
@@ -561,10 +561,10 @@ Edit(file_path=".claude/cc10x/activeContext.md",
 
 ```
 # Read existing content
-Read(file_path=".claude/cc10x/patterns.md")
+Read(file_path=".claude/cc10x_ninja/patterns.md")
 
 # Append by matching end of file and adding new content
-Edit(file_path=".claude/cc10x/patterns.md",
+Edit(file_path=".claude/cc10x_ninja/patterns.md",
      old_string="[last section heading]",
      new_string="[last section heading]
 
@@ -576,9 +576,9 @@ Edit(file_path=".claude/cc10x/patterns.md",
 
 ```
 # Read progress.md, find the task, mark it complete using Edit
-Read(file_path=".claude/cc10x/progress.md")
+Read(file_path=".claude/cc10x_ninja/progress.md")
 
-Edit(file_path=".claude/cc10x/progress.md",
+Edit(file_path=".claude/cc10x_ninja/progress.md",
      old_string="- [ ] [Task being completed]",
      new_string="- [x] [Task being completed] - [verification evidence]")
 ```

@@ -313,10 +313,10 @@ Bash(command="git commit -m 'docs: add <feature> design'")
 
 ```
 # First read existing content
-Read(file_path=".claude/cc10x/activeContext.md")
+Read(file_path=".claude/cc10x_ninja/activeContext.md")
 
 # Then use Edit to replace (matches first line, replaces entire content)
-Edit(file_path=".claude/cc10x/activeContext.md",
+Edit(file_path=".claude/cc10x_ninja/activeContext.md",
      old_string="# Active Context",
      new_string="# Active Context
 

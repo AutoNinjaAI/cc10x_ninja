@@ -40,10 +40,10 @@ description: |
 
 **LOAD FIRST (Before routing):**
 ```
-Bash(command="mkdir -p .claude/cc10x")
-Read(file_path=".claude/cc10x/activeContext.md")
-Read(file_path=".claude/cc10x/patterns.md")
-Read(file_path=".claude/cc10x/progress.md")
+Bash(command="mkdir -p .claude/cc10x_ninja")
+Read(file_path=".claude/cc10x_ninja/activeContext.md")
+Read(file_path=".claude/cc10x_ninja/patterns.md")
+Read(file_path=".claude/cc10x_ninja/progress.md")
 ```
 
 **UPDATE LAST (After workflow):** Use Edit tool on activeContext.md (permission-free).
@@ -193,7 +193,7 @@ If SKILL_HINTS includes github-research OR documentation lookup needed:
   → PHASE 2: PERSIST research (prevents context loss):
       Bash(command="mkdir -p docs/research")
       Write(file_path="docs/research/YYYY-MM-DD-<topic>-research.md", content="[research summary]")
-      Edit(file_path=".claude/cc10x/activeContext.md", ...)  # Add to Research References
+      Edit(file_path=".claude/cc10x_ninja/activeContext.md", ...)  # Add to Research References
   → PHASE 3: Task(cc10x:planner, prompt="...Research findings: {results}...\nResearch saved to: docs/research/YYYY-MM-DD-<topic>-research.md")
 ```
 Research is a PREREQUISITE, not a hint. Planner cannot skip it.

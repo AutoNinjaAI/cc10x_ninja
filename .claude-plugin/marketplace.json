@@ -1,8 +1,8 @@
 {
-  "name": "cc10x",
+  "name": "cc10x_ninja",
   "owner": {
-    "name": "Rom Iluz",
-    "email": "rom@iluz.net",
+    "name": "Orr Shoshan Levy",
+    "email": "orr@autoninja.ai",
     "url": "https://github.com/romiluz13"
   },
   "metadata": {
@@ -17,10 +17,10 @@
       "author": {
         "name": "Rom Iluz",
         "email": "rom@iluz.net",
-        "url": "https://github.com/romiluz13"
+        "url": "https://github.com/AutoNinjaAI"
       },
-      "homepage": "https://github.com/romiluz13/cc10x",
-      "repository": "https://github.com/romiluz13/cc10x",
+      "homepage": "https://github.com/AutoNinjaAI",
+      "repository": "https://github.com/AutoNinjaAI",
       "license": "MIT",
       "keywords": [
         "workflow-routing",
@@ -35,7 +35,7 @@
         "claude-code"
       ],
       "category": "development-tools",
-      "source": "./plugins/cc10x"
+      "source": "./plugins/cc10x_ninja"
     }
   ]
 }

@@ -14,9 +14,9 @@ skills: cc10x-ninja:session-memory, cc10x-ninja:planning-patterns, cc10x-ninja:a
 
 ## Memory First
 ```
-Bash(command="mkdir -p .claude/cc10x")
-Read(file_path=".claude/cc10x/activeContext.md")
-Read(file_path=".claude/cc10x/patterns.md")  # Existing architecture
+Bash(command="mkdir -p .claude/cc10x_ninja")
+Read(file_path=".claude/cc10x_ninja/activeContext.md")
+Read(file_path=".claude/cc10x_ninja/patterns.md")  # Existing architecture
 ```
 
 ## LSP First (MANDATORY)
@@ -128,7 +128,7 @@ Bash(command="mkdir -p docs/plans")
 Write(file_path="docs/plans/YYYY-MM-DD-<feature>-plan.md", content="...")
 
 # 2. Update memory with reference
-Edit(file_path=".claude/cc10x/activeContext.md", ...)
+Edit(file_path=".claude/cc10x_ninja/activeContext.md", ...)
 ```
 
 ## Confidence Score (REQUIRED)

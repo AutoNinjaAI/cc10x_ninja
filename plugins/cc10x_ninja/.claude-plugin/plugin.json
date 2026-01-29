@@ -1,14 +1,14 @@
 {
-  "name": "cc10x-ninja",
+  "name": "cc10x_ninja",
   "version": "6.0.0",
   "description": "AutoNinja fork of cc10x. Opus 4.5 model, LSP-first code navigation, Web research (WebFetch/WebSearch). Orchestrated TDD workflow with specialized subagents.",
   "author": {
     "name": "Orr Shoshan (AutoNinja)",
     "email": "orr@autoninja.ai",
-    "url": "https://github.com/autoninjaai"
+    "url": "https://github.com/AutoNinjaAI"
   },
-  "homepage": "https://github.com/romiluz13/cc10x",
-  "repository": "https://github.com/romiluz13/cc10x",
+  "homepage": "https://github.com/AutoNinjaAI",
+  "repository": "https://github.com/AutoNinjaAI",
   "license": "MIT",
   "keywords": [
     "workflow-routing",

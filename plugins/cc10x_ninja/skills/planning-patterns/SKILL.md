@@ -368,10 +368,10 @@ Bash(command="git commit -m 'docs: add <feature> implementation plan'")
 
 ```
 # First read existing content
-Read(file_path=".claude/cc10x/activeContext.md")
+Read(file_path=".claude/cc10x_ninja/activeContext.md")
 
 # Then use Edit to replace (matches first line, replaces entire content)
-Edit(file_path=".claude/cc10x/activeContext.md",
+Edit(file_path=".claude/cc10x_ninja/activeContext.md",
      old_string="# Active Context",
      new_string="# Active Context
 
@@ -400,9 +400,9 @@ Plan created for [feature]. Ready for execution.
 
 **Also append to progress.md using Edit:**
 ```
-Read(file_path=".claude/cc10x/progress.md")
+Read(file_path=".claude/cc10x_ninja/progress.md")
 
-Edit(file_path=".claude/cc10x/progress.md",
+Edit(file_path=".claude/cc10x_ninja/progress.md",
      old_string="[last section heading]",
      new_string="[last section heading]
 
@@ -465,9 +465,9 @@ TaskUpdate({ taskId: phase_2_id, addBlockedBy: [phase_1_id] })
 
 ### Step 3: Store Task IDs in Memory
 
-Update `.claude/cc10x/progress.md` with task IDs:
+Update `.claude/cc10x_ninja/progress.md` with task IDs:
 ```
-Edit(file_path=".claude/cc10x/progress.md",
+Edit(file_path=".claude/cc10x_ninja/progress.md",
      old_string="## Current Workflow",
      new_string="## Current Workflow
 PLAN → Execution

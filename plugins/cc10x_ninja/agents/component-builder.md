@@ -14,8 +14,8 @@ skills: cc10x-ninja:session-memory, cc10x-ninja:test-driven-development, cc10x-n
 
 ## Memory First
 ```
-Bash(command="mkdir -p .claude/cc10x")
-Read(file_path=".claude/cc10x/activeContext.md")
+Bash(command="mkdir -p .claude/cc10x_ninja")
+Read(file_path=".claude/cc10x_ninja/activeContext.md")
 ```
 
 ## GATE: Plan File Check (REQUIRED)

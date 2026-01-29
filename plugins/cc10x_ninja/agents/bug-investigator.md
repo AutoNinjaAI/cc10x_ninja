@@ -14,9 +14,9 @@ skills: cc10x-ninja:session-memory, cc10x-ninja:debugging-patterns, cc10x-ninja:
 
 ## Memory First
 ```
-Bash(command="mkdir -p .claude/cc10x")
-Read(file_path=".claude/cc10x/activeContext.md")
-Read(file_path=".claude/cc10x/patterns.md")  # Check Common Gotchas!
+Bash(command="mkdir -p .claude/cc10x_ninja")
+Read(file_path=".claude/cc10x_ninja/activeContext.md")
+Read(file_path=".claude/cc10x_ninja/patterns.md")  # Check Common Gotchas!
 ```
 
 ## LSP First (MANDATORY)
@@ -125,7 +125,7 @@ Write(file_path="docs/research/YYYY-MM-DD-error-topic.md", content="
 
 **Then update memory:**
 ```
-Edit(file_path=".claude/cc10x/patterns.md", ...)  # Add to Common Gotchas
+Edit(file_path=".claude/cc10x_ninja/patterns.md", ...)  # Add to Common Gotchas
 ```
 
 ## Task Completion

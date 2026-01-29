@@ -14,9 +14,9 @@ skills: cc10x-ninja:session-memory, cc10x-ninja:code-review-patterns, cc10x-ninj
 
 ## Memory First
 ```
-Bash(command="mkdir -p .claude/cc10x")
-Read(file_path=".claude/cc10x/activeContext.md")
-Read(file_path=".claude/cc10x/patterns.md")  # Project conventions
+Bash(command="mkdir -p .claude/cc10x_ninja")
+Read(file_path=".claude/cc10x_ninja/activeContext.md")
+Read(file_path=".claude/cc10x_ninja/patterns.md")  # Project conventions
 ```
 
 ## Git Context (Before Review)

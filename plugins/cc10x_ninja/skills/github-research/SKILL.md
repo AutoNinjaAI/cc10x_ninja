@@ -210,10 +210,10 @@ Write(file_path="docs/research/YYYY-MM-DD-<topic>-research.md", content="[full r
 
 ```
 # First read existing content
-Read(file_path=".claude/cc10x/activeContext.md")
+Read(file_path=".claude/cc10x_ninja/activeContext.md")
 
 # Then append to Research References section using Edit
-Edit(file_path=".claude/cc10x/activeContext.md",
+Edit(file_path=".claude/cc10x_ninja/activeContext.md",
      old_string="## Research References",
      new_string="## Research References
 | [Topic] | docs/research/YYYY-MM-DD-topic-research.md | [Key insight from findings] |")
@@ -221,7 +221,7 @@ Edit(file_path=".claude/cc10x/activeContext.md",
 
 **If Research References section doesn't exist, add it:**
 ```
-Edit(file_path=".claude/cc10x/activeContext.md",
+Edit(file_path=".claude/cc10x_ninja/activeContext.md",
      old_string="## Last Updated",
      new_string="## Research References
 | Topic | File | Key Insight |
@@ -236,9 +236,9 @@ Edit(file_path=".claude/cc10x/activeContext.md",
 **If research found gotchas or reusable patterns, add to patterns.md:**
 
 ```
-Read(file_path=".claude/cc10x/patterns.md")
+Read(file_path=".claude/cc10x_ninja/patterns.md")
 
-Edit(file_path=".claude/cc10x/patterns.md",
+Edit(file_path=".claude/cc10x_ninja/patterns.md",
      old_string="## Common Gotchas",
      new_string="## Common Gotchas
 - [Gotcha from research]: [Solution] (Source: docs/research/YYYY-MM-DD-topic-research.md)")
