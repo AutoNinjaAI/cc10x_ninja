@@ -285,7 +285,7 @@ After agent completes:
 
 | Detected Pattern | Skill | Agents |
 |------------------|-------|--------|
-| Frontend: components/, ui/, pages/, .tsx, .jsx, CSS, styling, "button", "form", "modal" | cc10x:frontend-patterns | planner, component-builder, code-reviewer, integration-verifier |
+| Frontend: components/, ui/, pages/, .tsx, .jsx, CSS, styling, "button", "form", "modal" | cc10x_ninja:frontend-patterns, cc10x_ninja:design-system | planner, component-builder, code-reviewer, integration-verifier |
 | API/Backend: api/, routes/, services/, "endpoint", "REST", "GraphQL" | cc10x:architecture-patterns | planner, bug-investigator, code-reviewer |
 | Vague: "not sure", "maybe", "options", "ideas", unclear requirements | cc10x:brainstorming | planner |
 | External: new tech (post-2024), unfamiliar library, complex integration (auth, payments) | cc10x:github-research | planner, bug-investigator |

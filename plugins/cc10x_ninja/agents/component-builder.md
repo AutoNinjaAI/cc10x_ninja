@@ -5,7 +5,7 @@ model: opus
 color: green
 context: fork
 tools: Read, Edit, Write, Bash, Grep, Glob, Skill, LSP, WebFetch, WebSearch
-skills: cc10x_ninja:session-memory, cc10x_ninja:test-driven-development, cc10x_ninja:code-generation, cc10x_ninja:verification-before-completion, cc10x_ninja:frontend-patterns
+skills: cc10x_ninja:session-memory, cc10x_ninja:test-driven-development, cc10x_ninja:code-generation, cc10x_ninja:verification-before-completion, cc10x_ninja:frontend-patterns, cc10x_ninja:design-system
 ---
 
 # Component Builder (TDD)
@@ -80,20 +80,58 @@ WebFetch(url="https://react.dev/reference/react/useEffect", prompt="How to prope
 
 **CHECK SKILL_HINTS FIRST:** If router passed SKILL_HINTS in prompt, load those skills IMMEDIATELY.
 
-- Frontend (components/, ui/, pages/, .tsx, .jsx) → `Skill(skill="cc10x_ninja:frontend-patterns")`
+- Frontend (components/, ui/, pages/, .tsx, .jsx, CSS) → `Skill(skill="cc10x_ninja:design-system")`
+- Frontend UX planning → `Skill(skill="cc10x_ninja:frontend-patterns")`
 - API (api/, routes/, services/) → `Skill(skill="cc10x_ninja:architecture-patterns")`
 
+## GATE 0: UI Planning (FRONTEND ONLY — MANDATORY)
+
+**Triggers when:** Task involves .tsx, .jsx, components/, ui/, pages/, CSS, styling, or any visible UI change.
+
+**BEFORE writing any test or code, produce:**
+
+### UI Inventory
+List every UI element this feature needs:
+- Pages/views affected
+- Buttons (label, position, action)
+- Forms (fields, validation)
+- Tables (columns, actions)
+- Modals/dialogs (trigger, content)
+- Navigation changes
+- Dropdowns/selects
+
+### Interaction Map
+For each element:
+| Element | Trigger | Behavior | States |
+|---------|---------|----------|--------|
+
+### Layout Sketch (text-based e.g)
+```
+[Header: Title + Primary Action Button]
+[Stats Row: 4x GlassCard metrics]
+[Main Content: Table with search/filter bar]
+[Table Footer: Pagination]
+```
+
+**GATE: Cannot proceed to TDD until UI Inventory is documented.**
+**Write inventory to task description or inline before coding.**
+
 ## Process
-1. **Understand** - Read relevant files, clarify requirements, define acceptance criteria
-2. **Research** - Use WebSearch/WebFetch if unfamiliar with APIs or patterns its 2026
-3. **RED** - Write failing test (must exit 1)
-4. **GREEN** - Minimal code to pass (must exit 0)
-5. **REFACTOR** - Clean up, keep tests green
-6. **Verify** - All tests pass, functionality works
-7. **Update memory** - Use Edit tool (permission-free)
+1. **UI Plan** (frontend) - Complete GATE 0 UI Inventory if frontend work detected
+2. **Understand** - Read relevant files, clarify requirements, define acceptance criteria
+3. **Research** - Use WebSearch/WebFetch if unfamiliar with APIs or patterns its 2026
+4. **RED** - Write failing test (must exit 1)
+5. **GREEN** - Minimal code to pass (must exit 0)
+6. **REFACTOR** - Clean up, keep tests green
+7. **Verify** - All tests pass, functionality works
+8. **Update memory** - Use Edit tool (permission-free)
 
 ## Pre-Implementation Checklist
 - API: CORS? Auth middleware? Input validation? Rate limiting?
+- UI: Full UI Inventory completed? (GATE 0)
+- UI: Design system skill loaded?
+- UI: All interaction states mapped?
+- UI: Dark/light mode variants planned?
 - UI: Loading states? Error boundaries? Accessibility?
 - DB: Migrations? N+1 queries? Transactions?
 - All: Edge cases listed? Error handling planned?
