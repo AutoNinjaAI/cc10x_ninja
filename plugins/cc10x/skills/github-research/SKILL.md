@@ -1,14 +1,19 @@
 ---
 name: github-research
 description: "Internal skill. Use cc10x-router for all development tasks."
-allowed-tools: WebFetch, mcp__octocode__githubSearchCode, mcp__octocode__githubSearchRepositories, mcp__octocode__githubViewRepoStructure, mcp__octocode__githubGetFileContent, mcp__octocode__githubSearchPullRequests, mcp__octocode__packageSearch, mcp__context7__resolve-library-id, mcp__context7__query-docs, Read, Write, Edit, Bash
+allowed-tools: WebFetch, WebSearch, mcp__octocode__githubSearchCode, mcp__octocode__githubSearchRepositories, mcp__octocode__githubViewRepoStructure, mcp__octocode__githubGetFileContent, mcp__octocode__githubSearchPullRequests, mcp__octocode__packageSearch, mcp__context7__resolve-library-id, mcp__context7__query-docs, Read, Write, Edit, Bash
 ---
 
 # External Code Research
 
 ## Overview
 
-Research external patterns, documentation, and best practices from GitHub and library docs when AI knowledge is insufficient. Use Octocode MCP for GitHub research, Context7 MCP for library documentation, with WebFetch as final fallback.
+Research external patterns, documentation, and best practices from GitHub, library docs, and web when AI knowledge is insufficient. 
+
+**Tool Priority:**
+1. **WebSearch + WebFetch** - Built-in, always available, best for docs and StackOverflow
+2. **Octocode MCP** - GitHub-specific searches (code, repos, PRs)
+3. **Context7 MCP** - Library documentation lookup
 
 **Core principle:** Research BEFORE building, not during. External research enhances planning, not execution.
 
@@ -25,10 +30,11 @@ If AI training knowledge covers the technology well, skip external research - UN
 ## When to Use
 
 **ALWAYS invoke when:**
-- User explicitly requests research ("research X", "how do others", "best practices", "find on github", "use octocode")
+- User explicitly requests research ("research X", "how do others", "best practices", "find on github")
 - Technology released after 2024 (AI knowledge cutoff)
 - Complex integration patterns (auth, payments, real-time)
 - Local debugging failed 3+ times with external service errors
+- Error message is unfamiliar or library-specific
 
 **NEVER invoke when:**
 - User says "quick" or "simple"
@@ -36,41 +42,106 @@ If AI training knowledge covers the technology well, skip external research - UN
 - Code review or refactoring tasks
 - Technology released before 2024 (unless user explicitly asks)
 
-**The rule:** Trust octocode for HOW. This skill only decides WHEN.
+## Web Research (PRIMARY - Always Available)
 
-## Availability Check (REQUIRED)
+**WebSearch + WebFetch are built-in Claude Code tools. Use them FIRST.**
 
-**Before using Octocode tools, verify availability:**
-
+### For Documentation
 ```
-# Try a simple package lookup to test MCP availability
+# Search for official docs
+WebSearch(query="React useEffect cleanup function official docs")
+
+# Fetch specific documentation page
+WebFetch(url="https://react.dev/reference/react/useEffect", prompt="How to properly clean up effects and avoid memory leaks?")
+```
+
+### For Error Messages
+```
+# Search for error solutions
+WebSearch(query="TypeError: Cannot read property 'map' of undefined React")
+
+# Fetch StackOverflow answer
+WebFetch(url="https://stackoverflow.com/questions/...", prompt="What is the recommended solution?")
+```
+
+### For Best Practices
+```
+# Search for current best practices
+WebSearch(query="authentication patterns Next.js 2025 best practices")
+
+# Fetch authoritative source
+WebFetch(url="https://nextjs.org/docs/authentication", prompt="What is the recommended auth pattern?")
+```
+
+### Pre-Approved Documentation Domains (Faster Extraction)
+These domains get optimized content extraction:
+- react.dev, angular.io, vuejs.org, nextjs.org
+- docs.python.org, nodejs.org, go.dev
+- pytorch.org, tensorflow.org, pandas.pydata.org
+- platform.claude.com, code.claude.com
+- developer.mozilla.org, learn.microsoft.com
+
+## MCP Research (SECONDARY - If Available)
+
+### Octocode MCP - GitHub Research
+
+**Check availability first:**
+```
 mcp__octocode__packageSearch(name="express", ecosystem="npm")
 ```
 
-**If Octocode unavailable → Fall back to Context7 MCP**
-**If Context7 unavailable → Fall back to WebFetch**
+**If available, use for:**
+- Searching GitHub code patterns
+- Finding real-world implementations
+- Exploring repository structures
+
+### Context7 MCP - Library Docs
+
+**For library-specific documentation:**
+```
+mcp__context7__resolve-library-id(libraryName="prisma")
+mcp__context7__query-docs(libraryId="prisma", query="how to handle transactions")
+```
+
+## Fallback Chain
+
+```
+TIER 1: WebSearch + WebFetch (ALWAYS AVAILABLE)
+   ↓ (if need GitHub code specifically)
+TIER 2: Octocode MCP
+   ↓ (if need structured library docs)  
+TIER 3: Context7 MCP
+```
+
+**NO LOCAL SEARCH** - This skill is for external research only. Local codebase search uses Grep/Glob/Read directly.
 
 ## Research Process
 
 ### Phase 1: Confirm Need
 
-Before using octocode tools, verify:
+Before using any research tools, verify:
 1. User explicitly requested research? → Proceed
-2. Technology is post-2024? → Proceed
+2. Technology is post-2024? → Proceed  
 3. Complex integration with uncertainty? → Proceed
-4. None of the above? → STOP. Use AI knowledge.
+4. Error message is unfamiliar? → Proceed
+5. None of the above? → STOP. Use AI knowledge.
 
-### Phase 2: Let Octocode Guide the Research
+### Phase 2: Execute Research
 
-**Trust octocode's embedded guidance.** It will:
-- Select the right tools and order
-- Optimize queries for token efficiency
-- Handle pagination and error recovery
+**For most queries, start with WebSearch:**
+```
+WebSearch(query="[specific technical question] [year if relevant]")
+```
 
-**Your job:** Provide clear research goals in the tool parameters:
-- `mainResearchGoal`: The overall question you're trying to answer
-- `researchGoal`: What this specific query seeks to find
-- `reasoning`: Why this query helps answer the main goal
+**Then fetch relevant pages:**
+```
+WebFetch(url="[URL from search results]", prompt="[specific question about this page]")
+```
+
+**Only use Octocode if you need:**
+- Actual code implementations from GitHub
+- Repository structure exploration
+- Pull request patterns
 
 ### Phase 3: Summarize for cc10x Memory
 
@@ -82,16 +153,6 @@ Extract only what's needed for the task at hand:
 
 **DO NOT dump entire files - summarize and cite.**
 
-## Fallback Chain
-
-```
-TIER 1: Octocode MCP → TIER 2: Context7 MCP → TIER 3: WebFetch
-```
-
-Try each tier in order. Fall back only if current tier is unavailable or fails.
-
-**NO LOCAL SEARCH** - This skill is for external research only. Local codebase search uses Grep/Glob/Read directly.
-
 ## Output Format
 
 ```markdown
@@ -100,7 +161,7 @@ Try each tier in order. Fall back only if current tier is unavailable or fails.
 **Knowledge Gap**: [What we didn't know]
 
 **Research Conducted**:
-- Source: [repo/docs URL]
+- Source: [URL or repo]
 - Query: [what we searched]
 
 **Key Findings**:
@@ -114,27 +175,6 @@ Try each tier in order. Fall back only if current tier is unavailable or fails.
 **References Saved**:
 - [URL for future debugging]
 ```
-
-## Integration Points
-
-**Two-Phase Execution (via cc10x-router):**
-
-The router executes research BEFORE invoking agents. This is NOT a hint - it's a prerequisite.
-
-```
-1. Router detects github-research trigger (explicit request OR knowledge gap)
-2. Router executes octocode tools directly (this skill's guidance)
-3. Router passes research results to agent in prompt
-```
-
-**Research results passed to:**
-- `planner` agent - For informed planning decisions
-- `bug-investigator` agent - For external error patterns
-
-**Never used during:**
-- `code-reviewer` - Review focuses on code itself
-- `silent-failure-hunter` - Speed is priority
-- `integration-verifier` - Verification, not research
 
 ## Save Research (MANDATORY)
 

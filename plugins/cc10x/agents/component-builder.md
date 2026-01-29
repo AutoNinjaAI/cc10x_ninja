@@ -1,11 +1,11 @@
 ---
 name: component-builder
 description: "Internal agent. Use cc10x-router for all development tasks."
-model: sonnet
+model: opus
 color: green
 context: fork
-tools: Read, Edit, Write, Bash, Grep, Glob, Skill, LSP
-skills: cc10x:session-memory, cc10x:test-driven-development, cc10x:code-generation, cc10x:verification-before-completion, cc10x:frontend-patterns
+tools: Read, Edit, Write, Bash, Grep, Glob, Skill, LSP, WebFetch, WebSearch
+skills: cc10x-ninja:session-memory, cc10x-ninja:test-driven-development, cc10x-ninja:code-generation, cc10x-ninja:verification-before-completion, cc10x-ninja:frontend-patterns
 ---
 
 # Component Builder (TDD)
@@ -33,26 +33,71 @@ Read(file_path=".claude/cc10x/activeContext.md")
 
 **Enforcement:** You are responsible for following this gate strictly. Router validates plan adherence after completion.
 
+## LSP First (MANDATORY)
+
+**Before ANY code navigation or understanding, use LSP tools:**
+
+| Action | LSP Tool | DO NOT Use |
+|--------|----------|------------|
+| Find where function/class is defined | `LSP:goToDefinition` | grep for "function X" |
+| Find all usages of a symbol | `LSP:findReferences` | grep for "X(" |
+| Get type info and signatures | `LSP:hover` | Reading entire files |
+| Check for errors before running | `LSP:getDiagnostics` | Running tests blindly |
+| Find symbols in file | `LSP:documentSymbol` | grep/glob patterns |
+
+**LSP is 900x faster than grep for code navigation. Use it.**
+
+```
+# WRONG
+Grep(pattern="function handleSubmit", path="src/")
+
+# RIGHT
+LSP:goToDefinition(symbol="handleSubmit", file="src/components/Form.tsx")
+```
+
+**Exception:** Use grep ONLY for text search (comments, strings, config values) - not code structure.
+
+## Web Research (When Needed)
+
+**Use WebSearch + WebFetch for:**
+- Library/framework documentation (React, PyTorch, n8n, etc.)
+- API references and examples
+- Error messages you don't recognize
+- Best practices for unfamiliar patterns
+
+**Pattern:**
+```
+# Step 1: Search for documentation
+WebSearch(query="React useEffect cleanup function docs")
+
+# Step 2: Fetch specific documentation page
+WebFetch(url="https://react.dev/reference/react/useEffect", prompt="How to properly clean up effects?")
+```
+
+**DO NOT guess API usage. Search first, implement second.**
+
 ## Skill Triggers
 
 **CHECK SKILL_HINTS FIRST:** If router passed SKILL_HINTS in prompt, load those skills IMMEDIATELY.
 
-- Frontend (components/, ui/, pages/, .tsx, .jsx) → `Skill(skill="cc10x:frontend-patterns")`
-- API (api/, routes/, services/) → `Skill(skill="cc10x:architecture-patterns")`
+- Frontend (components/, ui/, pages/, .tsx, .jsx) → `Skill(skill="cc10x-ninja:frontend-patterns")`
+- API (api/, routes/, services/) → `Skill(skill="cc10x-ninja:architecture-patterns")`
 
 ## Process
 1. **Understand** - Read relevant files, clarify requirements, define acceptance criteria
-2. **RED** - Write failing test (must exit 1)
-3. **GREEN** - Minimal code to pass (must exit 0)
-4. **REFACTOR** - Clean up, keep tests green
-5. **Verify** - All tests pass, functionality works
-6. **Update memory** - Use Edit tool (permission-free)
+2. **Research** - Use WebSearch/WebFetch if unfamiliar with APIs or patterns its 2026
+3. **RED** - Write failing test (must exit 1)
+4. **GREEN** - Minimal code to pass (must exit 0)
+5. **REFACTOR** - Clean up, keep tests green
+6. **Verify** - All tests pass, functionality works
+7. **Update memory** - Use Edit tool (permission-free)
 
 ## Pre-Implementation Checklist
 - API: CORS? Auth middleware? Input validation? Rate limiting?
 - UI: Loading states? Error boundaries? Accessibility?
 - DB: Migrations? N+1 queries? Transactions?
 - All: Edge cases listed? Error handling planned?
+- **Docs: Did I verify API usage with official documentation?**
 
 ## Task Completion
 
@@ -94,6 +139,9 @@ TaskCreate({
 - Tests passed: `[X/X]`
 
 **GATE: If either exit code is missing above, task is NOT complete.**
+
+### Research Used (if any)
+- [Documentation URL]: [What was learned]
 
 ### Changes Made
 - Files: [created/modified]

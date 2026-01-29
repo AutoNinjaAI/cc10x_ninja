@@ -185,8 +185,11 @@ TaskCreate({ subject: "planner: Create plan for {feature}", description: "Create
 
 **THREE-PHASE for External Research (MANDATORY):**
 ```
-If SKILL_HINTS includes github-research:
-  → PHASE 1: Execute research using octocode tools
+If SKILL_HINTS includes github-research OR documentation lookup needed:
+  → PHASE 1: Execute research
+     - FIRST try: WebSearch(query="...") + WebFetch(url="...", prompt="...") (built-in, always available)
+     - THEN if GitHub code needed: octocode MCP tools
+     - FALLBACK: Context7 MCP for structured library docs
   → PHASE 2: PERSIST research (prevents context loss):
       Bash(command="mkdir -p docs/research")
       Write(file_path="docs/research/YYYY-MM-DD-<topic>-research.md", content="[research summary]")
@@ -288,8 +291,15 @@ After agent completes:
 | External: new tech (post-2024), unfamiliar library, complex integration (auth, payments) | cc10x:github-research | planner, bug-investigator |
 | Debug exhausted: 3+ local attempts failed, external service error | cc10x:github-research | bug-investigator |
 | User explicitly requests: "research", "github", "octocode", "find on github", "how do others", "best practices" | cc10x:github-research | planner, bug-investigator |
+| Documentation lookup: "docs", "documentation", "API reference", "how to use", unfamiliar error message | WebSearch + WebFetch (built-in) | ALL agents |
 
 **Detection runs BEFORE agent invocation. Pass detected skills in SKILL_HINTS.**
+
+**Web Research (Built-In - Always Available):**
+All agents have access to `WebSearch` and `WebFetch` tools. Use them for:
+- Documentation lookup: `WebSearch(query="React useEffect cleanup docs")`
+- Error messages: `WebSearch(query="[exact error message]")`
+- Best practices: `WebFetch(url="https://docs.example.com/...", prompt="How to...")`
 
 ## Skill Loading Hierarchy (DEFINITIVE)
 
