@@ -194,7 +194,7 @@ If SKILL_HINTS includes github-research OR documentation lookup needed:
       Bash(command="mkdir -p docs/research")
       Write(file_path="docs/research/YYYY-MM-DD-<topic>-research.md", content="[research summary]")
       Edit(file_path=".claude/cc10x_ninja/activeContext.md", ...)  # Add to Research References
-  → PHASE 3: Task(cc10x:planner, prompt="...Research findings: {results}...\nResearch saved to: docs/research/YYYY-MM-DD-<topic>-research.md")
+  → PHASE 3: Task(subagent_type="cc10x_ninja:planner", model="opus", prompt="...Research findings: {results}...\nResearch saved to: docs/research/YYYY-MM-DD-<topic>-research.md")
 ```
 Research is a PREREQUISITE, not a hint. Planner cannot skip it.
 **Research without persistence is LOST after context compaction.**
@@ -203,7 +203,7 @@ Research is a PREREQUISITE, not a hint. Planner cannot skip it.
 
 **Pass task ID, plan file, and context to each agent:**
 ```
-Task(subagent_type="cc10x:component-builder", prompt="
+Task(subagent_type="cc10x_ninja:component-builder", model="opus", prompt="
 ## Task Context
 - **Task ID:** {taskId}
 - **Plan File:** {planFile or 'None'}
@@ -286,11 +286,11 @@ After agent completes:
 | Detected Pattern | Skill | Agents |
 |------------------|-------|--------|
 | Frontend: components/, ui/, pages/, .tsx, .jsx, CSS, styling, "button", "form", "modal" | cc10x_ninja:frontend-patterns, cc10x_ninja:design-system | planner, component-builder, code-reviewer, integration-verifier |
-| API/Backend: api/, routes/, services/, "endpoint", "REST", "GraphQL" | cc10x:architecture-patterns | planner, bug-investigator, code-reviewer |
-| Vague: "not sure", "maybe", "options", "ideas", unclear requirements | cc10x:brainstorming | planner |
-| External: new tech (post-2024), unfamiliar library, complex integration (auth, payments) | cc10x:github-research | planner, bug-investigator |
-| Debug exhausted: 3+ local attempts failed, external service error | cc10x:github-research | bug-investigator |
-| User explicitly requests: "research", "github", "octocode", "find on github", "how do others", "best practices" | cc10x:github-research | planner, bug-investigator |
+| API/Backend: api/, routes/, services/, "endpoint", "REST", "GraphQL" | cc10x_ninja:architecture-patterns | planner, bug-investigator, code-reviewer |
+| Vague: "not sure", "maybe", "options", "ideas", unclear requirements | cc10x_ninja:brainstorming | planner |
+| External: new tech (post-2024), unfamiliar library, complex integration (auth, payments) | cc10x_ninja:github-research | planner, bug-investigator |
+| Debug exhausted: 3+ local attempts failed, external service error | cc10x_ninja:github-research | bug-investigator |
+| User explicitly requests: "research", "github", "octocode", "find on github", "how do others", "best practices" | cc10x_ninja:github-research | planner, bug-investigator |
 | Documentation lookup: "docs", "documentation", "API reference", "how to use", unfamiliar error message | WebSearch + WebFetch (built-in) | ALL agents |
 
 **Detection runs BEFORE agent invocation. Pass detected skills in SKILL_HINTS.**
@@ -307,7 +307,7 @@ All agents have access to `WebSearch` and `WebFetch` tools. Use them for:
 
 ### 1. Agent Frontmatter `skills:` (PRELOAD - Automatic)
 ```yaml
-skills: cc10x:session-memory, cc10x:code-generation
+skills: cc10x_ninja:session-memory, cc10x_ninja:code-generation
 ```
 - Load AUTOMATICALLY when agent starts
 - Full skill content injected into agent context
@@ -316,7 +316,7 @@ skills: cc10x:session-memory, cc10x:code-generation
 
 ### 2. Router's SKILL_HINTS (MANDATORY - Agent Must Load)
 - Router detects patterns and passes hints in prompt
-- Agent MUST call `Skill(skill="cc10x:...")` for EACH hint
+- Agent MUST call `Skill(skill="cc10x_ninja:...")` for EACH hint
 - Loaded AFTER frontmatter (additive, not duplicate)
 - Use for: Context-specific skills based on task
 
@@ -368,7 +368,7 @@ skills: cc10x:session-memory, cc10x:code-generation
    - If multiple tasks ready (e.g., code-reviewer + silent-failure-hunter):
      → Invoke BOTH in same message (parallel execution)
    - Pass task ID in prompt:
-     Task(subagent_type="cc10x:{agent}", prompt="
+     Task(subagent_type="cc10x_ninja:{agent}", model="opus", prompt="
        Your task ID: {taskId}
        User request: {request}
        Requirements: {requirements}
@@ -402,8 +402,8 @@ TaskUpdate(taskId=reviewer_id, status="in_progress")
 TaskUpdate(taskId=hunter_id, status="in_progress")
 
 # Invoke BOTH in same message = parallel execution
-Task(subagent_type="cc10x:code-reviewer", prompt="Your task ID: {reviewer_id}...")
-Task(subagent_type="cc10x:silent-failure-hunter", prompt="Your task ID: {hunter_id}...")
+Task(subagent_type="cc10x_ninja:code-reviewer", model="opus", prompt="Your task ID: {reviewer_id}...")
+Task(subagent_type="cc10x_ninja:silent-failure-hunter", model="opus", prompt="Your task ID: {hunter_id}...")
 ```
 
 **CRITICAL:** Both Task calls in same message = both complete before you continue.
@@ -433,7 +433,7 @@ When parallel agents complete (code-reviewer + silent-failure-hunter), their out
    HUNTER_FINDINGS = {silent-failure-hunter's Critical section}
 
 3. Pass to integration-verifier:
-   Task(subagent_type="cc10x:integration-verifier", prompt="
+   Task(subagent_type="cc10x_ninja:integration-verifier", model="opus", prompt="
    ## Task Context
    - **Task ID:** {verifier_task_id}
 
